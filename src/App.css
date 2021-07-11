@@ -52,7 +52,7 @@ button {
 
 /* HIGHSCORES */
 .highScores-container {
-  padding-bottom: 100px;
+  padding-bottom: 130px;
 }
 
 .highscores-h1-title {
@@ -75,7 +75,7 @@ button {
 }
 
 .users-container {
-  margin-top: 25px;
+  margin-top: 40px;
 }
 
 .highscores-nousers {
@@ -146,19 +146,10 @@ button {
 /* NEW GAME FORM END */
 
 /* FOOTER */
-.footer::before {
-  content: "";
-  border-top: 1px solid black;
-  width: 90%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-}
-
 .footer {
   position: fixed;
   bottom: 0;
-  height: 75px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

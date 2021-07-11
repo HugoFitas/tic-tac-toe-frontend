@@ -16,6 +16,17 @@ const Board = ({ allUsers, setAllUsers }) => {
 
   const history = useHistory();
 
+  /* useEffect componentDidMount to detect reloads */
+  useEffect(() => {
+    /* window.addEventListener("beforeunload", alertUser);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+    }; */
+  }, []);
+  const alertUser = (e) => {
+    window.location.reload(history.push("/"));
+  };
+
   /* calculateWinner Function */
   const calculateWinner = (squares) => {
     const lines = [
@@ -47,22 +58,8 @@ const Board = ({ allUsers, setAllUsers }) => {
 
   const winner = calculateWinner(squareValue);
 
-  const currentPlayer1 = allUsers.find(
-    (player) => player.username === newPlayer1.username
-  );
-
-  const currentPlayer2 = allUsers.find(
-    (player) => player.username === newPlayer2.username
-  );
-
   /* useEffect */
   useEffect(() => {
-    setTimeout(() => {
-      console.log("cp1", currentPlayer1);
-      console.log("cp2", currentPlayer2);
-      console.log("winner", winner === newPlayer1.username);
-    }, 2000);
-
     if (winner === newPlayer1.username) {
       setNewplayer1({
         ...newPlayer1,
@@ -78,7 +75,16 @@ const Board = ({ allUsers, setAllUsers }) => {
     }
   }, [winner]);
 
-  /* handleClick */
+  /* find if the current player username is present in allUsers array */
+  const currentPlayer1 = allUsers.find(
+    (player) => player.username === newPlayer1.username
+  );
+
+  const currentPlayer2 = allUsers.find(
+    (player) => player.username === newPlayer2.username
+  );
+
+  /* handleClick function */
   const handleClick = (index) => {
     const eachSquare = squareValue.slice();
     if (calculateWinner(squareValue) || eachSquare[index]) {
@@ -89,6 +95,7 @@ const Board = ({ allUsers, setAllUsers }) => {
     setXIsNext(!xIsNext);
   };
 
+  /* handleHomePageClick function */
   const handleHomePageClick = () => {
     if (winner) {
       if (currentPlayer1 === undefined && winner === newPlayer1.username) {
@@ -105,7 +112,7 @@ const Board = ({ allUsers, setAllUsers }) => {
           .catch((err) => alert(err));
 
         const newAllUsers = allUsers.map((player) =>
-          player.id === currentPlayer1.id ? newPlayer1 : player
+          player.id === newPlayer1.id ? newPlayer1 : player
         );
         setAllUsers(newAllUsers);
       }
@@ -124,28 +131,10 @@ const Board = ({ allUsers, setAllUsers }) => {
           .catch((err) => alert(err));
 
         const newAllUsers = allUsers.map((player) =>
-          player.id === currentPlayer2.id ? newPlayer2 : player
+          player.id === newPlayer2.id ? newPlayer2 : player
         );
         setAllUsers(newAllUsers);
       }
-
-      /* if (currentPlayer1 && winner === newPlayer1.username) {
-      const newAllUsers = allUsers.map((player) =>
-        player.id === currentPlayer1.id ? newPlayer1 : player
-      );
-      setAllUsers(newAllUsers);
-    } else if (currentPlayer1 === undefined && winner === newPlayer1.username) {
-      setAllUsers([...allUsers, newPlayer1]);
-    }
-
-    if (currentPlayer2 && winner === newPlayer2.username) {
-      const newAllUsers = allUsers.map((player) =>
-        player.id === currentPlayer2.id ? newPlayer2 : player
-      );
-      setAllUsers(newAllUsers);
-    } else if (currentPlayer2 === undefined && winner === newPlayer2.username) {
-      setAllUsers([...allUsers, newPlayer2]);
-    } */
     }
 
     history.push("/");
@@ -155,12 +144,15 @@ const Board = ({ allUsers, setAllUsers }) => {
   let status;
 
   if (winner) {
-    status = <h1>{winner ? `Winner is ${winner}` : null}</h1>;
+    status = (
+      <h1 className="board-h1-status">
+        {winner ? `Winner is ${winner}` : null}
+      </h1>
+    );
   } else {
     status = (
-      <h1>
+      <h1 className="board-h1-status">
         {xIsNext ? `${newPlayer1.username}` : `${newPlayer2.username}`}'s turn
-        to play
       </h1>
     );
   }
@@ -177,7 +169,9 @@ const Board = ({ allUsers, setAllUsers }) => {
             handleClick={handleClick}
           />
         ))}
-        <button onClick={handleHomePageClick}>Return to homepage</button>
+        <button className="board-button-homepage" onClick={handleHomePageClick}>
+          Homepage
+        </button>
       </div>
     </div>
   );

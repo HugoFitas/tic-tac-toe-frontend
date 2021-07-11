@@ -30,7 +30,9 @@ const NewGameForm = ({
             onChange={handleChange}
             onClick={handleClick}
           />
-          <label htmlFor="player1">Player 2</label>
+          <label htmlFor="player1" className="newgame-popup-input-player2">
+            Player 2
+          </label>
           <input
             type="text"
             name="username"
@@ -39,7 +41,9 @@ const NewGameForm = ({
             onChange={handleChange}
             onClick={handleClick}
           />
-          <button type="submit">Start new game</button>
+          <button className="newgame-popup-button" type="submit">
+            Start new game
+          </button>
         </form>
       </div>
     </>

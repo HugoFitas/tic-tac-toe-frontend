@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { NewPlayersContext } from "../contexts/NewPlayersContext";
 import Footer from "./Footer";
@@ -10,6 +10,14 @@ const HighScores = ({ allUsers }) => {
 
   const { newPlayer1, setNewplayer1, newPlayer2, setNewplayer2 } =
     useContext(NewPlayersContext);
+
+  useEffect(() => {
+    allUsers.sort((a, b) =>
+      a.high_score < b.high_score
+        ? 1
+        : a.high_score === b.high_score && a.username.localeCompare(b.username)
+    );
+  }, [allUsers]);
 
   const history = useHistory();
 
@@ -56,12 +64,10 @@ const HighScores = ({ allUsers }) => {
           setIsNewGameFormVisible={setIsNewGameFormVisible}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
-          newPlayer1={newPlayer1}
-          newPlayer2={newPlayer2}
         />
       ) : null}
 
-      <h1>High Scores</h1>
+      <h1 className="highscores-h1-title">High Scores</h1>
       <div className="highScores">
         <div className="highScores-titles">
           <h3>Position</h3>
@@ -69,7 +75,7 @@ const HighScores = ({ allUsers }) => {
           <h3>Score</h3>
         </div>
         <div className="users-container">
-          {allUsers.map((user, index) => (
+          {allUsers.slice(0, 20).map((user, index) => (
             <User key={user.id} {...user} index={index} />
           ))}
         </div>

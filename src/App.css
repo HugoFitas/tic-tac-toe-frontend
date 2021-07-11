@@ -1,38 +1,228 @@
+/* 
+font-family: 'Lato', sans-serif;
+*/
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: #080738;
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-size: 1.25em;
+}
+
+/* GENERAL STYLES */
+h1 {
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+button,
+input {
+  font-family: "Lato", sans-serif;
+  border-radius: 100px;
+  padding: 0.4em 1em;
+  font-size: 1.25em;
+}
+
+button {
+  font-weight: bold;
+  color: #080738;
+
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
 }
+/* GENERAL STYLES END */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* HIGHSCORES */
+.highScores-container {
+  padding-bottom: 100px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.highscores-h1-title {
+  padding-top: 25px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.highScores {
+  width: 85%;
+  margin: auto;
+}
+
+.highScores-titles {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.users-container {
+  margin-top: 25px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user + .user {
+  margin-top: 30px;
+}
+/* HIGHSCORES END */
+
+/* NEW GAME FORM */
+.newgame-popup-bg {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #030221;
+  opacity: 0.7;
+}
+
+.newgame-popup-container {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #080738;
+  border-radius: 10px;
+  width: 80%;
+  padding: 25px;
+  box-shadow: 0px 0px 15px 2px rgb(255 255 255 / 20%);
+}
+
+.newgame-popup-container label,
+.newgame-popup-container input {
+  display: block;
+}
+
+.newgame-popup-container input {
+  width: 90%;
+  margin: 15px auto 0;
+}
+
+.newgame-popup-container label {
+  font-weight: bold;
+}
+
+.newgame-popup-input-player2 {
+  margin-top: 25px;
+}
+
+.newgame-popup-button {
+  margin-top: 25px;
+}
+/* NEW GAME FORM END */
+
+/* FOOTER */
+.footer::before {
+  content: "";
+  border-top: 1px solid black;
+  width: 90%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 75px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 100%;
+  background-color: #080738;
+  color: #fff;
+  box-shadow: 0px -4px 20px -7px rgba(255, 255, 255, 0.2);
+}
+/* FOOTER END */
+
+/* BOARD */
+.board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 75vw;
+  height: 75vw;
+  border-radius: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.board-h1-status {
+  margin-top: 0;
+  padding-top: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.board-button-homepage {
+  margin-top: 10vh;
+}
+/* BOARD END */
+
+/* SQUARE */
+.square {
+  height: calc(100% / 3);
+  width: calc(100% / 3);
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 10px rgb(255 255 255 / 20%);
+  color: #080738;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+/* SQUARE END */
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+  /* HIGHSCORES */
+  .highScores {
+    width: 550px;
+    margin: auto;
   }
-  to {
-    transform: rotate(360deg);
+  /* HIGHSCORES END */
+
+  /* BOARD */
+  .board {
+    width: 70vh;
+    height: 70vh;
   }
+
+  .board-button-homepage {
+    margin-top: 50px;
+  }
+  /* BOARD END */
+
+  /* NEW GAME FORM */
+  .newgame-popup-container {
+    width: 350px;
+  }
+  /* NEW GAME FORM END */
 }

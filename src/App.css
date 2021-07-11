@@ -2,11 +2,96 @@
   text-align: center;
 }
 
+html,
 body {
   height: 100%;
   width: 100%;
-  background-color: aqua;
+  margin: 0;
+  padding: 0;
 }
+
+/* GENERAL STYLES */
+h1 {
+  font-size: 2em;
+  margin-top: 25px;
+}
+
+h3 {
+  font-size: 1.3em;
+  margin-top: 15px;
+}
+/* GENERAL STYLES END */
+
+/* HIGHSCORES */
+.newgame-popup-bg {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  opacity: 0.7;
+}
+
+.newgame-popup-container {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+}
+
+.highScores-container {
+  padding-bottom: 80px;
+}
+
+.highScores {
+  width: 90%;
+  margin: auto;
+}
+
+.highScores-titles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.users-container {
+  margin-top: 15px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user + .user {
+  margin-top: 20px;
+}
+/* HIGHSCORES END */
+
+/* FOOTER */
+.footer::before {
+  content: "";
+  border-top: 1px solid black;
+  width: 90%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+}
+/* FOOTER END */
 
 /* BOARD */
 .board {
@@ -33,3 +118,14 @@ body {
   border-radius: 10px;
 }
 /* SQUARE END */
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 1024px) {
+  /* HIGHSCORES */
+  .highScores {
+    width: 960px;
+    margin: auto;
+  }
+  /* HIGHSCORES END */
+}

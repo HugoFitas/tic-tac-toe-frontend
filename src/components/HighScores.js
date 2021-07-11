@@ -15,7 +15,11 @@ const HighScores = ({ allUsers }) => {
     allUsers.sort((a, b) =>
       a.high_score < b.high_score
         ? 1
-        : a.high_score === b.high_score && a.username.localeCompare(b.username)
+        : a.high_score === b.high_score
+        ? a.username > b.username
+          ? 1
+          : -1
+        : -1
     );
   }, [allUsers]);
 
@@ -58,6 +62,7 @@ const HighScores = ({ allUsers }) => {
   };
 
   return (
+    /* New game form popup */
     <div className="highScores-container">
       {isNewGameFormVisible ? (
         <NewGameForm
@@ -74,11 +79,17 @@ const HighScores = ({ allUsers }) => {
           <h3>Player</h3>
           <h3>Score</h3>
         </div>
-        <div className="users-container">
-          {allUsers.slice(0, 20).map((user, index) => (
-            <User key={user.id} {...user} index={index} />
-          ))}
-        </div>
+        {allUsers.length ? (
+          <div className="users-container">
+            {allUsers.slice(0, 20).map((user, index) => (
+              <User key={user.id} {...user} index={index} />
+            ))}
+          </div>
+        ) : (
+          <h3 className="highscores-nousers">
+            No users yet. <br /> Be the first!
+          </h3>
+        )}
       </div>
       <Footer setIsNewGameFormVisible={setIsNewGameFormVisible} />
     </div>

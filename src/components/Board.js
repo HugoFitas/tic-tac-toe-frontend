@@ -63,7 +63,12 @@ const Board = ({ allUsers, setAllUsers }) => {
 
   /* useEffect */
   useEffect(() => {
-    if (winner === newPlayer1.username) {
+    setPlayer({
+      ...whichPlayer(),
+      high_score: whichPlayer() && whichPlayer().high_score + 1,
+    });
+
+    /* if (winner === newPlayer1.username) {
       setNewplayer1({
         ...newPlayer1,
         high_score: newPlayer1.high_score + 1,
@@ -75,7 +80,7 @@ const Board = ({ allUsers, setAllUsers }) => {
         ...newPlayer2,
         high_score: newPlayer2.high_score + 1,
       });
-    }
+    } */
   }, [winner]);
 
   /* find if the current player username is present in allUsers array */

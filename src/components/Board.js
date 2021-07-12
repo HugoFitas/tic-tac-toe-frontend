@@ -47,9 +47,28 @@ const Board = ({ allUsers, setAllUsers }) => {
 
   const winner = calculateWinner(squareValue);
 
+  const whichPlayer = () => {
+    if (winner) {
+      if (winner === newPlayer1.username) return newPlayer1;
+      else return newPlayer2;
+    }
+  };
+
+  const setPlayer = (setNewPlayer) => {
+    if (winner) {
+      if (winner === newPlayer1.username) return setNewplayer1(setNewPlayer);
+      else return setNewplayer2(setNewPlayer);
+    }
+  };
+
   /* useEffect */
   useEffect(() => {
-    if (winner === newPlayer1.username) {
+    setPlayer({
+      ...whichPlayer(),
+      high_score: whichPlayer() && whichPlayer().high_score + 1,
+    });
+
+    /* if (winner === newPlayer1.username) {
       setNewplayer1({
         ...newPlayer1,
         high_score: newPlayer1.high_score + 1,
@@ -61,17 +80,17 @@ const Board = ({ allUsers, setAllUsers }) => {
         ...newPlayer2,
         high_score: newPlayer2.high_score + 1,
       });
-    }
+    } */
   }, [winner]);
 
   /* find if the current player username is present in allUsers array */
-  const currentPlayer1 = allUsers.find(
+  /* const currentPlayer1 = allUsers.find(
     (player) => player.username === newPlayer1.username
   );
 
   const currentPlayer2 = allUsers.find(
     (player) => player.username === newPlayer2.username
-  );
+  ); */
 
   /* handleClick function */
   const handleClick = (index) => {
@@ -84,10 +103,33 @@ const Board = ({ allUsers, setAllUsers }) => {
     setXIsNext(!xIsNext);
   };
 
+  /* find if the winning player username is present in allUsers array */
+  const winningPlayer = allUsers.find(
+    (player) => player.username === (whichPlayer() && whichPlayer().username)
+  );
+
   /* handleHomePageClick function */
   const handleHomePageClick = () => {
     if (winner) {
-      if (currentPlayer1 === undefined && winner === newPlayer1.username) {
+      if (winningPlayer === undefined) {
+        axios
+          .post("/users", whichPlayer())
+          .then((result) => setPlayer(result.data))
+          .catch((err) => alert(err));
+
+        setAllUsers([...allUsers, whichPlayer()]);
+      } else if (winningPlayer) {
+        axios
+          .put(`/users/${winningPlayer.id}`, whichPlayer())
+          .then((result) => setPlayer(result.data))
+          .catch((err) => alert(err));
+
+        const newAllUsers = allUsers.map((player) =>
+          player.id === whichPlayer().id ? whichPlayer() : player
+        );
+        setAllUsers(newAllUsers);
+      }
+      /* if (currentPlayer1 === undefined && winner === newPlayer1.username) {
         axios
           .post("/users", newPlayer1)
           .then((result) => setNewplayer1(result.data))
@@ -123,7 +165,7 @@ const Board = ({ allUsers, setAllUsers }) => {
           player.id === newPlayer2.id ? newPlayer2 : player
         );
         setAllUsers(newAllUsers);
-      }
+      } */
     }
 
     history.push("/");

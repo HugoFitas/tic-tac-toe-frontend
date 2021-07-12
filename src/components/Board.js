@@ -16,17 +16,6 @@ const Board = ({ allUsers, setAllUsers }) => {
 
   const history = useHistory();
 
-  /* useEffect componentDidMount to detect reloads */
-  useEffect(() => {
-    /* window.addEventListener("beforeunload", alertUser);
-    return () => {
-      window.removeEventListener("beforeunload", alertUser);
-    }; */
-  }, []);
-  const alertUser = (e) => {
-    window.location.reload(history.push("/"));
-  };
-
   /* calculateWinner Function */
   const calculateWinner = (squares) => {
     const lines = [
@@ -140,15 +129,15 @@ const Board = ({ allUsers, setAllUsers }) => {
     history.push("/");
   };
 
-  /* if (winner) */
+  /* if there's a winner, a draw or still playing */
   let status;
 
+  const squareValueNotNull = squareValue.every((item) => item !== null);
+
   if (winner) {
-    status = (
-      <h1 className="board-h1-status">
-        {winner ? `Winner is ${winner}` : null}
-      </h1>
-    );
+    status = <h1 className="board-h1-status">Winner is {winner}</h1>;
+  } else if (!winner && squareValueNotNull) {
+    status = <h1 className="board-h1-status">Draw</h1>;
   } else {
     status = (
       <h1 className="board-h1-status">

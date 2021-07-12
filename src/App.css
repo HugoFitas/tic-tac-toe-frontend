@@ -2,6 +2,12 @@
 font-family: 'Lato', sans-serif;
 */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -33,15 +39,15 @@ h3 {
 button,
 input {
   font-family: "Lato", sans-serif;
-  border-radius: 100px;
   padding: 0.4em 1em;
+  border-radius: 15px;
   font-size: 1.25em;
 }
 
 button {
   font-weight: bold;
   color: #080738;
-
+  border-radius: 100px;
   cursor: pointer;
 }
 
@@ -119,7 +125,7 @@ button {
   border-radius: 10px;
   width: 80%;
   padding: 25px;
-  box-shadow: 0px 0px 15px 2px rgb(255 255 255 / 20%);
+  box-shadow: 0px 0px 10px 2px rgb(255 255 255 / 40%);
 }
 
 .newgame-popup-container label,
@@ -141,7 +147,7 @@ button {
 }
 
 .newgame-popup-button {
-  margin-top: 25px;
+  margin-top: 40px;
 }
 /* NEW GAME FORM END */
 
@@ -156,7 +162,15 @@ button {
   width: 100%;
   background-color: #080738;
   color: #fff;
-  box-shadow: 0px -4px 20px -7px rgba(255, 255, 255, 0.2);
+  /* box-shadow: 0px -4px 20px -7px rgba(255, 255, 255, 0.2); */
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 80%;
+  border-top: 1px solid white;
 }
 /* FOOTER END */
 

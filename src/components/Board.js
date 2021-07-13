@@ -67,30 +67,7 @@ const Board = ({ allUsers, setAllUsers }) => {
       ...whichPlayer(),
       high_score: whichPlayer() && whichPlayer().high_score + 1,
     });
-
-    /* if (winner === newPlayer1.username) {
-      setNewplayer1({
-        ...newPlayer1,
-        high_score: newPlayer1.high_score + 1,
-      });
-    }
-
-    if (winner === newPlayer2.username) {
-      setNewplayer2({
-        ...newPlayer2,
-        high_score: newPlayer2.high_score + 1,
-      });
-    } */
   }, [winner]);
-
-  /* find if the current player username is present in allUsers array */
-  /* const currentPlayer1 = allUsers.find(
-    (player) => player.username === newPlayer1.username
-  );
-
-  const currentPlayer2 = allUsers.find(
-    (player) => player.username === newPlayer2.username
-  ); */
 
   /* handleClick function */
   const handleClick = (index) => {
@@ -129,43 +106,6 @@ const Board = ({ allUsers, setAllUsers }) => {
         );
         setAllUsers(newAllUsers);
       }
-      /* if (currentPlayer1 === undefined && winner === newPlayer1.username) {
-        axios
-          .post("/users", newPlayer1)
-          .then((result) => setNewplayer1(result.data))
-          .catch((err) => alert(err));
-
-        setAllUsers([...allUsers, newPlayer1]);
-      } else if (currentPlayer1 && winner === newPlayer1.username) {
-        axios
-          .put(`/users/${currentPlayer1.id}`, newPlayer1)
-          .then((result) => setNewplayer1(result.data))
-          .catch((err) => alert(err));
-
-        const newAllUsers = allUsers.map((player) =>
-          player.id === newPlayer1.id ? newPlayer1 : player
-        );
-        setAllUsers(newAllUsers);
-      }
-
-      if (currentPlayer2 === undefined && winner === newPlayer2.username) {
-        axios
-          .post("/users", newPlayer2)
-          .then((result) => setNewplayer2(result.data))
-          .catch((err) => alert(err));
-
-        setAllUsers([...allUsers, newPlayer2]);
-      } else if (currentPlayer2 && winner === newPlayer2.username) {
-        axios
-          .put(`/users/${currentPlayer2.id}`, newPlayer2)
-          .then((result) => setNewplayer2(result.data))
-          .catch((err) => alert(err));
-
-        const newAllUsers = allUsers.map((player) =>
-          player.id === newPlayer2.id ? newPlayer2 : player
-        );
-        setAllUsers(newAllUsers);
-      } */
     }
 
     history.push("/");
